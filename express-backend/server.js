@@ -7,11 +7,14 @@ const path = require("path");
 const app = express();
 const PORT = 3000;
 
-const mongoURI =
-  "mongodb+srv://CoffeeAdmin:lm5AtguSYK9FTvzm@clustercoffee.crgvugs.mongodb.net/contactDB?retryWrites=true&w=majority&appName=ClusterCoffee"; // or Atlas URI
+require("dotenv").config();
+const mongoURI = process.env.MONGO_URI;
 
 mongoose
-  .connect(mongoURI)
+  .connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
