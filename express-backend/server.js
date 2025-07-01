@@ -5,20 +5,22 @@ const mongoose = require("mongoose");
 const path = require("path");
 
 const app = express();
-const PORT = 3000;
+const PORT = 5000;
 
 require("dotenv").config();
 const mongoURI = process.env.MONGO_URI;
 
 mongoose
-  .connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(mongoURI)
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Allow React dev server
+    credentials: true,              // Send cookies
+  })
+);
 
 app.use(
   session({
@@ -31,16 +33,9 @@ app.use(
 );
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../frontend")));
 
-// Define Mongoose schema
-const messageSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  message: String,
-  createdAt: { type: Date, default: Date.now },
-});
-const Message = mongoose.model("Message", messageSchema);
+// Mongoose Message schema
+const Message = require("./models/Message");
 
 // API Route
 app.post("/contact", async (req, res) => {
@@ -92,35 +87,46 @@ app.post("/login", (req, res) => {
 // Logout route
 app.get("/logout", (req, res) => {
   req.session.destroy(() => {
-    res.redirect("/admin-dashboard/login.html");
+    res.redirect("/admin-login");
   });
 });
 
-// Serve protected HTML
-app.get("/admin-dashboard/admin-dashboard.html", (req, res) => {
+app.get("/check-auth", (req, res) => {
   if (req.session.loggedIn) {
-    res.sendFile(path.join(__dirname, "protected/admin-dashboard.html"));
+    res.json({ loggedIn: true });
   } else {
-    res.redirect("/admin-dashboard/login.html");
+    res.json({ loggedIn: false });
   }
 });
 
-// Serve protected CSS
-app.get("/admin-dashboard/admin-dashboard.css", (req, res) => {
-  if (req.session.loggedIn) {
-    res.sendFile(path.join(__dirname, "protected/admin-dashboard.css"));
-  } else {
-    res.status(403).send("Forbidden");
-  }
+//All done for admin dashboard
+
+//User Register route
+const User = require("./models/User");
+
+app.post("/api/register", async (req, res) => {
+  const { name, email, password } = req.body;
+  if (!name || !email || !password) return res.status(400).json({ message: "All fields required" });
+
+  const exists = await User.findOne({ email });
+  if (exists) return res.status(409).json({ message: "Email already registered" });
+
+  const newUser = new User({ name, email, password });
+  await newUser.save();
+  res.status(201).json({ user: newUser });
 });
 
-// Serve protected JS
-app.get("/admin-dashboard/admin-dashboard.js", (req, res) => {
-  if (req.session.loggedIn) {
-    res.sendFile(path.join(__dirname, "protected/admin-dashboard.js"));
-  } else {
-    res.status(403).send("Forbidden");
-  }
+// User Login route
+app.post("/api/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+  if (!user) return res.status(400).json({ message: "User not found" });
+
+  if (user.password !== password)
+    return res.status(400).json({ message: "Invalid password" });
+
+  res.json({ user });
 });
 
 app.listen(PORT, () => {
