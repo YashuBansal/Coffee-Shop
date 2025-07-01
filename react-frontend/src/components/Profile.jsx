@@ -37,7 +37,7 @@ const Profile = () => {
           </button>
         </div>
       ) : (
-        <p style={styles.error}>You must be loggedin to view this page.</p>
+        <p style={styles.error}>You must be logged in to view this page.</p>
       )}
     </div>
   );
