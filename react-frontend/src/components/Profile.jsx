@@ -2,62 +2,73 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-    const navigate = useNavigate();
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
 
-    useEffect(() => {
-        if (!user) {
-            navigate("/user-login");
-            
-        }
-    }, [user, navigate]);
+  useEffect(() => {
+    if (!user) {
+      navigate("/user-login");
+    }
+  }, [user, navigate]);
 
-    return (
-        <div style={styles.container}>
-            <h2>User Profile</h2>
-            {user ? (
-                <div style={styles.profile}>
-                    <p><strong>Name:</strong> {user.name}</p>
-                    <p><strong>Email:</strong> {user.email}</p>
-                    <p><strong>Joined:</strong> {new Date(user.createdAt).toLocaleDateString()}</p>
-                    <button style={styles.button} onClick={() => {
-                        localStorage.removeItem("user");
-                        navigate("/user-login");
-                    }}>Logout</button>
-                </div>
-            ) : (
-                <p style={styles.error}>You must be logged in to view this page.</p>
-            )}
+  return (
+    <div style={styles.container}>
+      <h2>User Profile</h2>
+      {user ? (
+        <div style={styles.profile}>
+          <p>
+            <strong>Name:</strong> {user.name}
+          </p>
+          <p>
+            <strong>Email:</strong> {user.email}
+          </p>
+          <p>
+            <strong>Joined:</strong>{" "}
+            {new Date(user.createdAt).toLocaleDateString()}
+          </p>
+          <button
+            style={styles.button}
+            onClick={() => {
+              localStorage.removeItem("user");
+              navigate("/user-login");
+            }}
+          >
+            Logout
+          </button>
         </div>
-    );
+      ) : (
+        <p style={styles.error}>You must be loggedin to view this page.</p>
+      )}
+    </div>
+  );
 };
 
 const styles = {
-    container: {
-        padding: "20px",
-        fontFamily: "Arial, sans-serif",
-        maxWidth: "600px",
-        margin: "0 auto",
-    },
-    profile: {
-        padding: "20px",
-        border: "1px solid #ccc",
-        borderRadius: "5px",
-        backgroundColor: "#f9f9f9",
-    },
-    button: {
-        padding: "10px 15px",
-        backgroundColor: "#007bff",
-        color: "#fff",
-        border: "none",
-        borderRadius: "5px",
-        cursor: "pointer",
-        marginTop: "10px",
-    },
-    error: {
-        color: "red",
-        marginTop: "10px",
-    },
+  container: {
+    padding: "20px",
+    fontFamily: "Arial, sans-serif",
+    maxWidth: "600px",
+    margin: "0 auto",
+  },
+  profile: {
+    padding: "20px",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    backgroundColor: "#f9f9f9",
+  },
+  button: {
+    padding: "10px 15px",
+    backgroundColor: "#007bff",
+    color: "#fff",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+    marginTop: "10px",
+  },
+  error: {
+    color: "red",
+    marginTop: "10px",
+  },
 };
 
 export default Profile;
