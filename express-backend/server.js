@@ -14,7 +14,7 @@ mongoose
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 // Middleware
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(cors({ origin: "https://coffee-shop-tau-five.vercel.app", credentials: true }));
 app.use(express.json());
 app.use(
   session({
@@ -23,7 +23,9 @@ app.use(
     saveUninitialized: true,
     cookie: {
       httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000, // 1 days
+      secure: true,
+      sameSite: "none", // Required for cross-origin cookies
+      maxAge: 48 * 60 * 60 * 1000, // 2 days
     },
   })
 );

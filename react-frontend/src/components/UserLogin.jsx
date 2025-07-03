@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { API_BASE_URL } from "../config";
 
 const UserLogin = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -17,7 +18,7 @@ const UserLogin = () => {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:5000/user/login", {
+      const res = await fetch(`${API_BASE_URL}/user/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./AdminDashboard.css";
+import { API_BASE_URL } from "../config";
 
 const AdminDashboard = () => {
   const [messages, setMessages] = useState([]);
 
   const fetchMessages = async () => {
     try {
-      const res = await fetch("http://localhost:5000/admin/messages", {
+      const res = await fetch(`${API_BASE_URL}/admin/messages`, {
         credentials: "include",
       });
       if (res.status === 403) {
@@ -24,7 +25,7 @@ const AdminDashboard = () => {
   const deleteMessage = async (id) => {
     if (!window.confirm("Are you sure you want to delete this message?")) return;
 
-    const res = await fetch(`http://localhost:5000/messages/${id}`, {
+    const res = await fetch(`${API_BASE_URL}/messages/${id}`, {
       method: "DELETE",
       credentials: "include",
     });
@@ -55,7 +56,7 @@ const AdminDashboard = () => {
 
 
   const handleLogout = async () => {
-    await fetch("http://localhost:5000/logout", {
+    await fetch(`${API_BASE_URL}/logout`, {
       credentials: "include", // important to include session cookie
     });
     window.location.href = "/admin-login";
