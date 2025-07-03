@@ -9,12 +9,12 @@ const PORT = 5000;
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO_URI) 
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 // Middleware
-app.use(cors({origin: "http://localhost:3000", credentials: true}));
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.json());
 app.use(
   session({
@@ -35,9 +35,11 @@ app.use((req, res, next) => {
 
 // Routes
 const adminRoutes = require("./routes/adminRoutes");
-const userRoutes = require("./routes/userRoutes");
 app.use("/admin", adminRoutes);
+const userRoutes = require("./routes/userRoutes");
 app.use("/user", userRoutes);
+const passRoutes = require("./routes/passRoutes");
+app.use("/pass", passRoutes);
 
 //Start the server
 app.listen(PORT, () => {

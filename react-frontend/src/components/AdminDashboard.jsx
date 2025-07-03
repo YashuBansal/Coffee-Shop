@@ -6,7 +6,7 @@ const AdminDashboard = () => {
 
   const fetchMessages = async () => {
     try {
-      const res = await fetch("http://localhost:5000/messages", {
+      const res = await fetch("http://localhost:5000/admin/messages", {
         credentials: "include",
       });
       if (res.status === 403) {

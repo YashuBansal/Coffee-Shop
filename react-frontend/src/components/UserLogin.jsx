@@ -79,6 +79,9 @@ const UserLogin = () => {
         <button type="button" style={styles.button} onClick={() => navigate("/user-register")}>
           Register Now
         </button>
+        <button type="button" style={styles.button} onClick={() => navigate("/forgot-password")}>
+          Forgot Password?
+          </button>
         {error && <p style={styles.error}>{error}</p>}
       </form>
     </div>
