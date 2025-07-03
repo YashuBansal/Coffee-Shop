@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../index.css';
+import { HashLink as Link } from 'react-router-hash-link';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -9,6 +10,7 @@ const Navbar = () => {
     document.body.classList.toggle('nav-open');
     document.body.classList.toggle('icon-hidden');
   };
+  const user = JSON.parse(localStorage.getItem("user"));
 
   return (
     <header>
@@ -21,12 +23,19 @@ const Navbar = () => {
           <button id="nav-toggle-close" onClick={toggleMenu}>
             <i className="fas fa-times"></i>
           </button>
-          <li><a href="#home" className="nav-link">Home</a></li>
-          <li><a href="#about" className="nav-link">About</a></li>
-          <li><a href="#menu" className="nav-link">Menu</a></li>
-          <li><a href="#testimonials" className="nav-link">Testimonials</a></li>
-          <li><a href="#gallery" className="nav-link">Gallery</a></li>
-          <li><a href="#contact" className="nav-link">Contact</a></li>
+          <li><Link to="/#home" smooth className="nav-link">Home</Link></li>
+          <li><Link to="/#about" smooth className="nav-link">About</Link></li>
+          <li><Link to="/#menu" smooth className="nav-link">Menu</Link></li>
+          <li><Link to="/#testimonials" smooth className="nav-link">Testimonials</Link></li>
+          <li><Link to="/#gallery" smooth className="nav-link">Gallery</Link></li>
+          <li><Link to="/#contact" smooth className="nav-link">Contact</Link></li>
+          <li>
+            {user ? (
+                <Link to="/profile" className="nav-link"><i class="fa-regular fa-circle-user"></i> {user.name}</Link>
+              ) : (
+                <Link to="/user-login" className="nav-link">Login <i className="fa fa-sign-in"></i></Link>
+              )}
+          </li>
         </ul>
 
         <button id="nav-toggle-open" onClick={toggleMenu}>

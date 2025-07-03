@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../pages/Navbar";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ const Profile = () => {
   }, [user, navigate]);
 
   return (
+    <>
+    <Navbar />
     <div style={styles.container}>
       <h2>User Profile</h2>
       {user ? (
@@ -30,9 +33,9 @@ const Profile = () => {
             style={styles.button}
             onClick={() => {
               localStorage.removeItem("user");
-              navigate("/user-login");
+              navigate("../", { replace: true});
             }}
-          >
+            >
             Logout
           </button>
         </div>
@@ -40,13 +43,13 @@ const Profile = () => {
         <p style={styles.error}>You must be logged in to view this page.</p>
       )}
     </div>
+    </>
   );
 };
 
 const styles = {
   container: {
-    padding: "20px",
-    fontFamily: "Arial, sans-serif",
+    paddingTop: "50px",
     maxWidth: "600px",
     margin: "0 auto",
   },

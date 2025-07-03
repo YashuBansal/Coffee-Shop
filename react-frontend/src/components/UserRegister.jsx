@@ -17,7 +17,7 @@ const UserRegister = () => {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/register", {
+      const res = await fetch("http://localhost:5000/user/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -79,6 +79,13 @@ const UserRegister = () => {
         <button type="submit" style={styles.button}>
           Register
         </button>
+        <button
+          type="button"
+          style={styles.button}
+          onClick={() => navigate("/user-login")}
+        >
+          Login Now
+        </button>
         {error && <p style={styles.error}>{error}</p>}
       </form>
     </div>
@@ -120,7 +127,7 @@ const styles = {
     userSelect: "none",
   },
   button: {
-    width: "100%",
+    width: "50%",
     padding: "10px",
     color: "black",
   },

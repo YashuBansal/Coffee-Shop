@@ -540,7 +540,7 @@ header .navbar {
 }
 
 /* Responsive Styles */
-@media screen and (max-width: 940px) {
+@media screen and (max-width: 1048px) {
     :root {
         --font-size-m: 1rem;
         --font-size-l: 1.3rem;
@@ -605,6 +605,15 @@ header .navbar {
         margin-top: 0.8rem;
         color: var(--primary-color);
         font-size: var(--font-size-m);
+    }
+}
+@media screen and (max-width: 940px) {
+    :root {
+        --font-size-m: 1rem;
+        --font-size-l: 1.3rem;
+        --font-size-xl: 1.5rem;
+        --font-size-xxl: 1.8rem;
+
     }
 
     /* Hero Section */

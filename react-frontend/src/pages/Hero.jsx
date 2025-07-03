@@ -1,7 +1,10 @@
 import React from 'react';
 import heroImage from '../assets/images/coffee-hero-section.png';
+import { HashLink as Link } from 'react-router-hash-link';
 
 const Hero = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  
   return (
     <section className="hero-section" id="home">
       <div className="content-section">
@@ -13,8 +16,13 @@ const Hero = () => {
           </p>
 
           <div className="hero-buttons">
-            <a href="#order" className="button order-now">Order Now</a>
-            <a href="#contact" className="button contact-us">Contact Us</a>
+            {user ? (
+              <Link to="#" className="button login-now">Order Now</Link>
+            ):(
+              <Link to="/user-register" className="button register-now">Register Now</Link>
+            )
+            }
+            <Link to="/#contact" className="button contact-us">Contact Us</Link>
           </div>
         </div>
         <div className="hero-image-wrapper">
