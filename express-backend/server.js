@@ -14,9 +14,10 @@ mongoose
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 // Middleware
-app.use(cors({ 
-  origin:"https://coffee-shop-tau-five.vercel.app",
-  credentials: true }));
+app.use(cors({
+  origin: ["http://localhost:3000", "https://coffee-shop-tau-five.vercel.app"],
+  credentials: true
+}));
   
 app.use(express.json());
 app.use(
