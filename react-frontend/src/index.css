@@ -155,7 +155,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 1.5rem;
+    padding: 0.5rem 1.5rem;
     color: var(--white-color);
 }
 
@@ -611,6 +611,9 @@ section {
         --font-size-xxl: 1.8rem;
 
     }
+    section {
+        min-height: var(--real-vh);
+    }
 
     /* Hero Section */
     .hero-section .content-section {
@@ -640,7 +643,6 @@ section {
     .about-section .content-section {
         gap: 3rem;
         flex-direction: column-reverse;
-        padding: 0 1.5rem;
     }
 
     .about-section .about-image-wrapper .about-image {
@@ -690,9 +692,6 @@ section {
 }
 
 @media screen and (max-width: 640px) {
-    section {
-        min-height: var(--real-vh);
-    }
     .menu-section .menu-items {
         grid-template-columns: repeat(1, 1fr);
     }
