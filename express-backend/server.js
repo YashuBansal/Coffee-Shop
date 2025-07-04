@@ -23,8 +23,8 @@ app.use(express.json());
 app.use(
   session({
     secret: "secret123", // use process.env.SECRET in production
-    resave: false,
-    saveUninitialized: true,
+    secure: true,
+    sameSite: "none",
     cookie: {
       httpOnly: true,
       secure: true,
@@ -46,6 +46,11 @@ const userRoutes = require("./routes/userRoutes");
 app.use("/user", userRoutes);
 const passRoutes = require("./routes/passRoutes");
 app.use("/pass", passRoutes);
+
+// render shows this message when the server is running
+app.get("/", (req, res) => {
+  res.send("✅ Backend is live");
+});
 
 //Start the server
 app.listen(PORT, () => {
