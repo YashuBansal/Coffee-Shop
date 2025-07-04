@@ -143,18 +143,20 @@ header .navbar {
     display: none;
 }
 
-.hero-section {
+section {
     min-height: 100vh;
+}
+.hero-section {
+    display: flex;
     background: var(--primary-color);
 }
 
 .hero-section .content-section {
     display: flex;
     align-items: center;
-    min-height: 100vh;
-    color: var(--white-color);
     justify-content: space-between;
     padding: 0 1.5rem;
+    color: var(--white-color);
 }
 
 .hero-section .hero-text .title {
@@ -218,7 +220,6 @@ header .navbar {
 /* About Section */
 .about-section {
     background: var(--light-pink-color);
-    min-height: 100vh;
     display: flex;
 }
 
@@ -267,7 +268,6 @@ header .navbar {
 
 /* Menu Section */
 .menu-section {
-    min-height: 100vh;
     background: var(--dark-color);
 }
 
@@ -310,7 +310,6 @@ header .navbar {
 
 /*Testimonials Section */
 .testimonials-section {
-    min-height: 100vh;
     background: var(--light-pink-color);
 }
 
@@ -377,10 +376,6 @@ header .navbar {
 }
 
 /* Gallery Section */
-.gallery-section {
-    min-height: 100vh;
-}
-
 .gallery-section .section-title {
     color: var(--primary-color);
 }
@@ -412,6 +407,7 @@ header .navbar {
 /* Contact Section */
 .contact-section {
     background: var(--light-pink-color);
+    min-height: auto;
 }
 
 .contact-section .content-section {
@@ -694,6 +690,9 @@ header .navbar {
 }
 
 @media screen and (max-width: 640px) {
+    section {
+        min-height: var(--real-vh);
+    }
     .menu-section .menu-items {
         grid-template-columns: repeat(1, 1fr);
     }

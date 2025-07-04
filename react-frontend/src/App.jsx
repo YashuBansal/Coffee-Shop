@@ -18,6 +18,9 @@ import Contact from "./pages/Contact";
 import Footer from "./pages/Footer";
 import "./index.css";
 
+// Import ViewportFixer to set real viewport height
+import Viewport from "./pages/ViewPort";
+
 // Layout with Navbar/Footer for main pages
 const MainLayout = () => (
   <>
@@ -29,6 +32,7 @@ const MainLayout = () => (
     <Gallery />
     <Contact />
     <Footer />
+    <Viewport />
   </>
 );
 
