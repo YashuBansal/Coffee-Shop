@@ -15,9 +15,12 @@ mongoose
 
 // Middleware
 app.use(cors({ 
-  origin: "https://coffee-shop-tau-five.vercel.app",
-  origin: "http://localhost:3000", // For local development
+  origin: [
+    "https://coffee-shop-tau-five.vercel.app",
+    "http://localhost:3000"
+  ],
   credentials: true }));
+  
 app.use(express.json());
 app.use(
   session({
