@@ -291,7 +291,7 @@ section {
 
 .menu-section .menu-item {
     text-align: center;
-    overflow-x: hidden;
+    overflow-x: hidden; /*overrrrrrrrrrrrrrrrrrrrrrrr*/
 }
 
 .menu-section .menu-item .menu-image {
@@ -301,12 +301,13 @@ section {
 }
 
 .menu-section .menu-item-title {
-    font-size: var(--font-size-l);
+    font-size: var(--font-size-m);
     font-weight: var(--font-weight-semi-bold);
     margin: 0.5rem 0;
 }
 
 .menu-section .menu-item-description {
+    font-size: var(--font-size-s);
     padding: 0 1.5rem;
 }
 
@@ -541,6 +542,7 @@ section {
 /* Responsive Styles */
 @media screen and (max-width: 1048px) {
     :root {
+        --font-size-s: 0.8rem;
         --font-size-m: 1rem;
         --font-size-l: 1.3rem;
         --font-size-xl: 1.5rem;
