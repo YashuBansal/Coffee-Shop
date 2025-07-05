@@ -6,6 +6,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
+    overflow: hidden;
 }
 
 :root {
@@ -146,6 +147,7 @@ header .navbar {
 section {
     min-height: 100vh;
 }
+
 .hero-section {
     display: flex;
     background: var(--primary-color);
@@ -490,6 +492,7 @@ section {
 .status-message {
     position: relative;
 }
+
 .status-message #status {
     position: absolute;
     font-size: var(--font-size-s);
@@ -603,6 +606,7 @@ section {
         font-size: var(--font-size-m);
     }
 }
+
 @media screen and (max-width: 940px) {
     :root {
         --font-size-m: 1rem;
@@ -611,6 +615,7 @@ section {
         --font-size-xxl: 1.8rem;
 
     }
+
     section {
         min-height: var(--real-vh);
     }
