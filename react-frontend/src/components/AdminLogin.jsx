@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./FormPanel.css";
 import { API_BASE_URL } from "../config";
 
 const AdminLogin = () => {
@@ -23,15 +24,15 @@ const AdminLogin = () => {
     });
 
     if (res.ok) {
-      window.location.href = "/admin-dashboard";
+      window.location.href = `${API_BASE_URL}/admin/login`;
     } else {
       setError("Invalid username or password");
     }
   };
 
   return (
-    <div style={styles.container}>
-      <form onSubmit={handleSubmit} style={styles.form}>
+    <div className="form-container">
+      <form onSubmit={handleSubmit} className="form-outline">
         <h2>Admin Login</h2>
         <input
           type="text"
@@ -39,53 +40,23 @@ const AdminLogin = () => {
           placeholder="Username"
           required
           onChange={handleChange}
-          style={styles.input}
-        />
+          className="form-input"
+          />
         <input
           type="password"
           name="password"
           placeholder="Password"
           required
           onChange={handleChange}
-          style={styles.input}
+          className="form-input"
         />
-        <button type="submit" style={styles.button}>
+        <button type="submit" className="form-button">
           Login
         </button>
-        {error && <p style={styles.error}>{error}</p>}
+        {error && <p className="form-error">{error}</p>}
       </form>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    fontFamily: "Arial",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh",
-  },
-  form: {
-    padding: "20px",
-    border: "1px solid #ccc",
-    borderRadius: "5px",
-    width: "300px",
-  },
-  input: {
-    display: "block",
-    margin: "10px 0",
-    padding: "10px",
-    width: "100%",
-  },
-  button: {
-    padding: "10px",
-    width: "100%",
-  },
-  error: {
-    color: "red",
-    marginTop: "10px",
-  },
 };
 
 export default AdminLogin;
