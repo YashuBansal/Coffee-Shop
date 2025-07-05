@@ -291,6 +291,7 @@ section {
 
 .menu-section .menu-item {
     text-align: center;
+    overflow-x: hidden;
 }
 
 .menu-section .menu-item .menu-image {
@@ -618,7 +619,6 @@ section {
         --font-size-l: 1.3rem;
         --font-size-xl: 1.5rem;
         --font-size-xxl: 1.8rem;
-
     }
 
 
