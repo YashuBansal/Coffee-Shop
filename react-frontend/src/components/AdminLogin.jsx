@@ -24,7 +24,7 @@ const AdminLogin = () => {
     });
 
     if (res.ok) {
-      window.location.href = `${API_BASE_URL}/admin/login`;
+      window.location.href = "/AdminDashboard";
     } else {
       setError("Invalid username or password");
     }
@@ -41,7 +41,7 @@ const AdminLogin = () => {
           required
           onChange={handleChange}
           className="form-input"
-          />
+        />
         <input
           type="password"
           name="password"
