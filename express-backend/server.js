@@ -25,14 +25,13 @@ app.use(express.json());
 app.use(
   session({
     secret: "secret123", // use process.env.SECRET in production
-    // secure: true,
-    // sameSite: "none",
     resave: false,
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: false,
-      // sameSite: "none", // Required for cross-origin cookies
+      secure: true, // Set to true if using HTTPS
+      // secure: process.env.NODE_ENV === "production", // Use this in production
+      sameSite: "none", // Required for cross-origin cookies
       maxAge: 48 * 60 * 60 * 1000, // 2 days
     },
   })
