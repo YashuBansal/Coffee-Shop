@@ -606,6 +606,12 @@ section {
     }
 }
 
+@media screen and (max-width: 980px) {
+    section {
+        min-height: var(--real-vh);
+    }
+}
+
 @media screen and (max-width: 940px) {
     :root {
         --font-size-m: 1rem;
@@ -693,10 +699,6 @@ section {
 }
 
 @media screen and (max-width: 640px) {
-
-    section {
-        min-height: var(--real-vh);
-    }
     
     .menu-section .menu-items {
         grid-template-columns: repeat(1, 1fr);
