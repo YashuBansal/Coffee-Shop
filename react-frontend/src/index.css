@@ -71,7 +71,7 @@ img {
 }
 
 .content-section {
-    padding: 4rem 1.5rem 2.5rem;
+    padding: 4rem 1.5rem 4rem;
     max-width: var(--site-max-width);
     margin: auto;
 }
@@ -229,7 +229,7 @@ section {
     gap: 2rem;
     justify-content: space-between;
     align-items: center;
-    padding: 4rem 1.5rem 0;
+    padding: 4rem 1.5rem 2rem;
 }
 
 .about-section .about-image-wrapper .about-image {
@@ -291,7 +291,7 @@ section {
 
 .menu-section .menu-item {
     text-align: center;
-    overflow-x: hidden; /*overrrrrrrrrrrrrrrrrrrrrrrr*/
+    overflow-x: hidden;
 }
 
 .menu-section .menu-item .menu-image {
