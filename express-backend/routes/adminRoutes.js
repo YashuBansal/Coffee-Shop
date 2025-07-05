@@ -8,6 +8,7 @@ router.post("/login", (req, res) => {
 
   if (username === "admin" && password === "password123") {
     req.session.loggedIn = true;
+    console.log("Logged in, session:", req.session);
     return res.status(200).send("Login success");
   } else {
     return res.status(401).send("Invalid login");
@@ -40,6 +41,7 @@ router.post("/contact", async (req, res) => {
 
 // Fetch all messages route
 router.get("/messages", async (req, res) => {
+  console.log("Check session:", req.session);
     if (!req.session.loggedIn) return res.status(403).send("Forbidden");
     try {
         const messages = await Message.find().sort({ createdAt: -1 }); // recent first

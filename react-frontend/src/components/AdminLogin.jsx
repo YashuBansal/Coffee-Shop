@@ -24,7 +24,7 @@ const AdminLogin = () => {
     });
 
     if (res.ok) {
-      window.location.href = "/AdminDashboard";
+      window.location.href = "/admin-dashboard";
     } else {
       setError("Invalid username or password");
     }

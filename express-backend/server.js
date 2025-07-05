@@ -1,11 +1,13 @@
 const express = require("express");
-const cors = require("cors");
 const session = require("express-session");
+const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+app.set("trust proxy", 1);
 
 // Connect to MongoDB
 mongoose
@@ -23,12 +25,14 @@ app.use(express.json());
 app.use(
   session({
     secret: "secret123", // use process.env.SECRET in production
-    secure: true,
-    sameSite: "none",
+    // secure: true,
+    // sameSite: "none",
+    resave: false,
+    saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: true,
-      sameSite: "none", // Required for cross-origin cookies
+      secure: false,
+      // sameSite: "none", // Required for cross-origin cookies
       maxAge: 48 * 60 * 60 * 1000, // 2 days
     },
   })
