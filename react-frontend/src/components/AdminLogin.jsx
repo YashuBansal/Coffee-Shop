@@ -24,8 +24,17 @@ const AdminLogin = () => {
     });
 
     if (res.ok) {
-      window.location.href = "/admin-dashboard";
-    } else {
+      try{
+        window.location.href = "/admin-dashboard";
+      }
+      catch (error) {
+        setError("Server may be waking up... trying again in 10 seconds.");
+        setTimeout(() => {
+          window.location.reload();
+        }, 10000);
+      }
+    }
+    else {
       setError("Invalid username or password");
     }
   };
