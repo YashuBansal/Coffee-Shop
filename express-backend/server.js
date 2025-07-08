@@ -24,7 +24,7 @@ app.use(cors({
 app.use(express.json());
 app.use(
   session({
-    secret: "secret123", // use process.env.SECRET in production
+    secret: process.env.SESSION_SECRET || "secret123", // use process.env.SECRET in production
     resave: false,
     saveUninitialized: false,
     cookie: {
