@@ -17,7 +17,7 @@ const Hero = () => {
 
           <div className="hero-buttons">
             {user ? (
-              <Link to="#" className="button login-now">Order Now</Link>
+              <Link to="/order-page" className="button login-now">Order Now</Link>
             ):(
               <Link to="/user-register" className="button register-now">Register Now</Link>
             )

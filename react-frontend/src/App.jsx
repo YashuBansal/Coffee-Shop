@@ -7,6 +7,7 @@ import UserLogin from "./components/UserLogin";
 import Profile from "./components/Profile";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
+import OrderPage from "./components/OrderPage";
 
 import Navbar from "./pages/Navbar";
 import Hero from "./pages/Hero";
@@ -48,6 +49,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/order-page" element={<OrderPage />} />
       </Routes>
     </Router>
   );
