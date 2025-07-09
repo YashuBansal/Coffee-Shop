@@ -4,7 +4,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { API_BASE_URL } from "../config";
 
 const UserLogin = () => {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -42,14 +42,6 @@ const UserLogin = () => {
     <div style={styles.container}>
       <form onSubmit={handleSubmit} style={styles.form}>
         <h2>User Login</h2>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          required
-          onChange={handleChange}
-          style={styles.input}
-        />
         <input
           type="email"
           name="email"

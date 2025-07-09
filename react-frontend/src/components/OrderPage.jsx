@@ -1,51 +1,106 @@
-import react from 'react';
+import React, {useState, useEffect} from 'react';
+import { API_BASE_URL } from '../config';
 
 const OrderPage = () => {
-    const orders = [
-        // Sample order data
-        { userId: 1, item: 'Espresso', quantity: 2, price: 5.00, payment: 'cash', createdAt: '2023-10-01T12:00:00Z' },
-        { userId: 2, item: 'Latte', quantity: 1, price: 4.50, payment: 'Gpay', createdAt: '2023-10-02T14:30:00Z' },
-        { userId: 3, item: 'Cappuccino', quantity: 3, price: 6.00, payment: 'card', createdAt: '2023-10-03T16:45:00Z' },
-    ];
+    const [orders, setOrders] = useState([]);
+    const [newOrder, setNewOrder] = useState({
+        item: "",
+        quantity: 1,
+        payment: "",
+    });
+
+    const userId = localStorage.getItem('userId');
+
+    // Fetch existing orders
+    useEffect(() => {
+        const fetchOrders = async () => {
+            try {
+                const res = await fetch(`${API_BASE_URL}/order/${userId}`);
+                const data = await res.json();
+                setOrders(data.orders);
+                }
+            catch (err) {
+                console.log('Error fetching orders:', err);
+            }
+        };
+        if (userId) fetchOrders();
+    },[userId]);
+
+    // Handle new order submission
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        try {
+            const res = await fetch(`${API_BASE_URL}/order`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...newOrder, userId }),
+            });
+
+            const data = await res.json();
+            if (data.success) {
+                alert(`Order placed! ${userId}`);
+                setOrders((prev) => [data.order, ...prev]); // Optimistically update UI
+                setNewOrder({ item: "", quantity: 1, payment: "" });
+            } else {
+                alert("Failed to place order.");
+            }
+        } catch (err) {
+            console.error('Error creating order:', err);
+        }
+    }
     return (
         <div style ={Styles.container}>
             <h1>Order Page</h1>
-            <div style={Styles.orderList}>
-                {orders.map((order) => (
-                    <div key={order.id} style={Styles.ordercard}>
-                        <p><strong>item:</strong>{order.item}</p>
-                        <p><strong>item:</strong>${order.price}</p>
-                        <p><strong>item:</strong>{order.quantity}</p>
-                        <p><strong>item:</strong>{order.payment}</p>
-                        <p><strong>item:</strong>{(order.createdAt)}</p>
-                    </div>
-                ))};
-            </div>
+
+            <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Item"
+          value={newOrder.item}
+          onChange={(e) => setNewOrder({ ...newOrder, item: e.target.value })}
+          required
+        />
+        <input
+          type="number"
+          min="1"
+          placeholder="Quantity"
+          value={newOrder.quantity}
+          onChange={(e) => setNewOrder({ ...newOrder, quantity: parseInt(e.target.value) })}
+          required
+        />
+        <button type="submit">Place Order</button>
+      </form>
+
+        <h2>📦 My Order</h2>
+                <ul style={Styles.orderList}>
+                    {orders.map((order) => (
+                        <li key={order.id} style={Styles.orderCard}>
+                            {order.item} — {order.quantity} pcs — {new Date(order.createdAt).toLocaleString()}
+                        </li>
+                    ))}
+                </ul>
         </div>
     );
 };
 
 const Styles = {
     container: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100vh',
-        backgroundColor: '#333',
-        padding: '20px',
+        padding: "2rem",
+        maxWidth: "600px",
+        margin: "auto",
+        fontFamily: "Poppins, sans-serif",
     },
     orderList: {
-        marginTop: "1.5rem",
-        display: "grid",
-        gap: "1rem",
+        listStyle: "none",
+        padding: 0,
     },
     orderCard: {
+        background: "#fafafa",
+        marginBottom: "1rem",
         padding: "1rem",
-        border: "1px solid #ccc",
-        borderRadius: "10px",
-        backgroundColor: "#fefefe",
-        boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+        borderRadius: "8px",
+        boxShadow: "0 2px 5px rgba(0, 0, 0, 0.05)",
     },
 };
 
